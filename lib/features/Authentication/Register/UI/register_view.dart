@@ -74,6 +74,7 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                       SizedBox(height: 50,),
                       customElevatedButton(
+                        label: "Sign Up",
                         onPressed: (){
                         GoRouter.of(context).push(PagesRoute.login);
 

@@ -5,10 +5,11 @@ import '../../../../../core/colors/AppColors.dart';
 
 class customElevatedButton extends StatelessWidget {
   const customElevatedButton({
-    super.key, this.onPressed,
+    super.key, this.onPressed, required this.label,
   });
 
   final void Function()? onPressed;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class customElevatedButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(12), // Rounded corners
             ),
           ),
-          child: Text("Sign Up",
+          child: Text(label,
             style: TextStyle(
                 fontSize: 20
             ),

@@ -16,6 +16,25 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   bool _obscureText = true;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  bool _isButtonEnabled = false;
+
+  void _checkFieldsFilled() {
+    setState(() {
+      _isButtonEnabled = emailController.text.isNotEmpty &&
+          passwordController.text.isNotEmpty;
+
+    });
+  }
+
+  void initState() {
+    super.initState();
+    // Listen to all controllers
+    emailController.addListener(_checkFieldsFilled);
+    passwordController.addListener(_checkFieldsFilled);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +67,14 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 SizedBox(height: 70,),
                 Form(
+                  key: _formKey,
                      child: Column(
                          children: [
-                           CustomTextField(label: "Email Address", hint: "Enter you Email"),
+                           CustomTextField(controller: emailController,warn : "Email is required",label: "Email Address", hint: "Enter you Email"),
                            SizedBox(height: 18,),
                            CustomPassword(
+                             controller: passwordController,
+                               warn: " Password is required",
                                label: "Password",
                                hint: "Enter you password",
                                suffixIcon: IconButton(
@@ -81,7 +103,12 @@ class _LoginViewState extends State<LoginView> {
                              ),
                            ),
                            SizedBox(height: 85,),
-                           customElevatedButton(label: "Log In",onPressed: (){},),
+                           customElevatedButton(
+                             foregroundColor: _isButtonEnabled ? AppColors.black : AppColors.primaryColor,
+                             backgroundColor: _isButtonEnabled ? AppColors.primaryColor : AppColors.grey,
+                             label: "Log In",
+                             onPressed: (){},
+                           ),
                            SizedBox(height: 40,),
                            Row(
                              mainAxisAlignment: MainAxisAlignment.center,

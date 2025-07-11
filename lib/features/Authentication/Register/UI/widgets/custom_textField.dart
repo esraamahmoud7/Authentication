@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import '../../../../../core/colors/AppColors.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({super.key, required this.label, this.prefixIcon, required this.hint});
+  const CustomTextField({super.key, required this.label, this.prefixIcon, required this.hint, required this.warn, this.controller});
 
-  final String label,hint;
+  final String label,hint,warn;
   final Widget? prefixIcon;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,8 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         SizedBox(height: 10),
-        TextField(
+        TextFormField(
+          controller: controller,
           decoration: InputDecoration(
             prefixIcon: prefixIcon,
             hintText: hint,
@@ -32,18 +34,20 @@ class CustomTextField extends StatelessWidget {
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide(
-                color: AppColors.primaryColor,   // Border color
-                width: 3.0,           // Border width
+                color: AppColors.primaryColor,
+                width: 3.0,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide(
-              color: AppColors.primaryColor,   // Border color
+              color: AppColors.primaryColor,
               width: 3.0,
               )
             )
           ),
+          validator: (value) =>
+                value == null || value.isEmpty ? warn: null,
         ),
         SizedBox(height: 16,)
       ],

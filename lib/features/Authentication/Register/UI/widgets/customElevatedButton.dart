@@ -5,11 +5,12 @@ import '../../../../../core/colors/AppColors.dart';
 
 class customElevatedButton extends StatelessWidget {
   const customElevatedButton({
-    super.key, this.onPressed, required this.label,
+    super.key, this.onPressed, required this.label, required this.backgroundColor, required this.foregroundColor,
   });
 
   final void Function()? onPressed;
   final String label;
+  final Color backgroundColor,foregroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class customElevatedButton extends StatelessWidget {
       child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primaryColor,
+            backgroundColor: backgroundColor,
             foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12), // Rounded corners

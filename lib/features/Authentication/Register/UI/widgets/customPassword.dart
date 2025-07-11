@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import '../../../../../core/colors/AppColors.dart';
 
 class CustomPassword extends StatelessWidget {
-  const CustomPassword({super.key, required this.label, this.prefixIcon, this.suffixIcon, required this.hint, required this.obscureText});
+  const CustomPassword({super.key, required this.label, this.prefixIcon, this.suffixIcon, required this.hint, required this.obscureText, required this.warn, this.controller});
 
   final String label,hint;
   final Widget? prefixIcon,suffixIcon;
   final bool obscureText;
+  final String warn;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,10 @@ class CustomPassword extends StatelessWidget {
           ),
         ),
         SizedBox(height: 10),
-        TextField(
+        TextFormField(
+          controller: controller,
+          validator: (value) =>
+                    value == null || value.isEmpty ? warn : null,
           obscureText: obscureText,
           decoration: InputDecoration(
             prefixIcon: prefixIcon,

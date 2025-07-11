@@ -16,6 +16,32 @@ class RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends State<RegisterView> {
   bool _obscureText = true;
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
+  bool _isButtonEnabled = false;
+  final _formKey = GlobalKey<FormState>();
+
+  void _checkFieldsFilled() {
+    setState(() {
+      _isButtonEnabled = nameController.text.isNotEmpty &&
+          emailController.text.isNotEmpty &&
+          passwordController.text.isNotEmpty &&
+          confirmPasswordController.text.isNotEmpty;
+    });
+  }
+
+  void initState() {
+    super.initState();
+    // Listen to all controllers
+    nameController.addListener(_checkFieldsFilled);
+    emailController.addListener(_checkFieldsFilled);
+    passwordController.addListener(_checkFieldsFilled);
+    confirmPasswordController.addListener(_checkFieldsFilled);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +63,15 @@ class _RegisterViewState extends State<RegisterView> {
               ),
               SizedBox(height: 48,),
               Form(
+                  key: _formKey,
                   child: Column(
                     children: [
-                      const CustomTextField(label: "Name",hint: 'Enter your name',),
-                      const CustomTextField(label: "Email",prefixIcon: Icon(Icons.email_outlined,color: AppColors.primaryColor,size: 25,),hint: 'Enter your email',),
-                      CustomPassword(label: "Password",
+                      CustomTextField(warn : "Name is required",label: "Name",hint: 'Enter your name',controller: nameController,),
+                      CustomTextField(warn : "Email is required",label: "Email",prefixIcon: Icon(Icons.email_outlined,color: AppColors.primaryColor,size: 25,),hint: 'Enter your email',controller: emailController,),
+                      CustomPassword(
+                        controller: passwordController,
+                        warn: " Password is required",
+                        label: "Password",
                         hint: 'Enter your Password',
                         suffixIcon: IconButton(
                             onPressed: (){
@@ -56,7 +86,10 @@ class _RegisterViewState extends State<RegisterView> {
                           ),
                         ), obscureText: _obscureText,
                       ),
-                      CustomPassword(label: "Confirm Password",
+                      CustomPassword(
+                        controller: confirmPasswordController,
+                        warn: " Confirm Password is required",
+                        label: "Confirm Password",
                         hint: 'Confirm your Password',
                         suffixIcon: IconButton(
                           onPressed: (){
@@ -74,11 +107,17 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                       SizedBox(height: 50,),
                       customElevatedButton(
+                        foregroundColor: _isButtonEnabled ? AppColors.black : AppColors.primaryColor,
+                        backgroundColor: _isButtonEnabled ? AppColors.primaryColor : AppColors.grey,
                         label: "Sign Up",
-                        onPressed: (){
-                        GoRouter.of(context).push(PagesRoute.login);
-
-                      },),
+                        onPressed: _isButtonEnabled
+                            ? () {
+                          if (_formKey.currentState?.validate() == true) {
+                            GoRouter.of(context).push(PagesRoute.login);
+                          }
+                        }
+                            : null,
+                      ),
                       SizedBox(height: 24,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

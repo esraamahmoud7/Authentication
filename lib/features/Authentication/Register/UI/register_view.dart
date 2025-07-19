@@ -1,4 +1,5 @@
 import 'package:authentication/core/colors/AppColors.dart';
+import 'package:authentication/core/theme/appTheme.dart';
 import 'package:authentication/features/Authentication/Register/UI/widgets/customElevatedButton.dart';
 import 'package:authentication/features/Authentication/Register/UI/widgets/customPassword.dart';
 import 'package:authentication/features/Authentication/Register/UI/widgets/custom_textField.dart';
@@ -33,6 +34,7 @@ class _RegisterViewState extends State<RegisterView> {
     });
   }
 
+  @override
   void initState() {
     super.initState();
     // Listen to all controllers
@@ -54,10 +56,9 @@ class _RegisterViewState extends State<RegisterView> {
               Image.asset("assets/images/logo.png",width: 100,height: 150,),
               Center(
                 child: Text("Create An Account",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primaryColor
+                  style: AppStyles.textStyle24.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryColor
                   ),
                 ),
               ),
@@ -113,7 +114,7 @@ class _RegisterViewState extends State<RegisterView> {
                         onPressed: _isButtonEnabled
                             ? () {
                           if (_formKey.currentState?.validate() == true) {
-                            GoRouter.of(context).push(PagesRoute.login);
+                            GoRouter.of(context).push(PagesRoute.OTP);
                           }
                         }
                             : null,
@@ -123,19 +124,19 @@ class _RegisterViewState extends State<RegisterView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("Have an account already?  ",
-                            style: TextStyle(
-                              fontSize: 18,
+                            style: AppStyles.textStyle18.copyWith(
                               fontWeight: FontWeight.w500
-                            ),),
+                            ),
+                          ),
                           GestureDetector(
                             onTap: (){
                               GoRouter.of(context).push(PagesRoute.login);
                             },
                             child: Text("Log in",
-                              style: TextStyle(
-                                fontSize: 18,
+                              style: AppStyles.textStyle18.copyWith(
                                   fontWeight: FontWeight.w500,
                                   color: AppColors.primaryColor
+
                               ),
                             ),
                           )

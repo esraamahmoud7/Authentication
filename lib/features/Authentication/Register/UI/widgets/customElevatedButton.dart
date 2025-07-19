@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/colors/AppColors.dart';
+import '../../../../../core/theme/appTheme.dart';
 
 
 class customElevatedButton extends StatelessWidget {
@@ -27,9 +28,7 @@ class customElevatedButton extends StatelessWidget {
             ),
           ),
           child: Text(label,
-            style: TextStyle(
-                fontSize: 20
-            ),
+            style: AppStyles.textStyle20
 
           )
 

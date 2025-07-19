@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/colors/AppColors.dart';
+import '../../../../../core/theme/appTheme.dart';
 
 class CustomPassword extends StatelessWidget {
   const CustomPassword({super.key, required this.label, this.prefixIcon, this.suffixIcon, required this.hint, required this.obscureText, required this.warn, this.controller});
@@ -19,9 +20,8 @@ class CustomPassword extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child: Text(label,
-            style: TextStyle(
+            style: AppStyles.textStyle20.copyWith(
                 color: AppColors.primaryColor,
-                fontSize: 20,
                 fontWeight: FontWeight.w500
             ),
           ),
@@ -44,13 +44,19 @@ class CustomPassword extends StatelessWidget {
                 width: 3.0,           // Border width
               ),
             ),
-              focusedBorder: OutlineInputBorder(
+            errorBorder: UnderlineInputBorder(
+               borderSide: BorderSide(color: Colors.red),
+            ),
+            focusedErrorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.red, width: 2),
+            ),
+            focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
                     color: AppColors.primaryColor,   // Border color
                     width: 3.0,
                   )
-              )
+            )
           ),
         ),
         SizedBox(height: 16,)

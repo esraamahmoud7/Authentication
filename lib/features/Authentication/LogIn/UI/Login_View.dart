@@ -1,3 +1,5 @@
+import 'package:authentication/core/images/app_images.dart';
+import 'package:authentication/core/theme/appTheme.dart';
 import 'package:authentication/features/Authentication/Register/UI/widgets/customElevatedButton.dart';
 import 'package:authentication/features/Authentication/Register/UI/widgets/customPassword.dart';
 import 'package:authentication/features/Authentication/Register/UI/widgets/custom_textField.dart';
@@ -44,23 +46,21 @@ class _LoginViewState extends State<LoginView> {
             padding: const EdgeInsets.symmetric(horizontal: 15,vertical:30 ),
             child: ListView(
               children: [
-                Image.asset("assets/images/logo.png",width: 100,height: 150,),
+                Image.asset(AppImages.logo,width: 100,height: 150,),
                 Center(
                   child: Column(
                     children: [
                       Text("Welcome Back",
-                        style: TextStyle(
-                            fontSize: 24,
+                        style:AppStyles.textStyle24.copyWith(
                             fontWeight: FontWeight.bold,
                             color: AppColors.primaryColor
-                        ),
+                        )
                       ),
                       Text("Login to continue",
-                        style: TextStyle(
-                            fontSize: 22,
+                        style:AppStyles.textStyle22.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.primaryColor
-                        ),
+                        )
                       ),
                     ]
                   )
@@ -95,11 +95,10 @@ class _LoginViewState extends State<LoginView> {
                            Align(
                              alignment: Alignment.centerRight,
                              child: Text("Forget Password",
-                               style: TextStyle(
+                               style:AppStyles.textStyle20.copyWith(
                                    color: AppColors.primaryColor,
-                                   fontSize: 20,
                                    fontWeight: FontWeight.w500
-                               ),
+                               )
                              ),
                            ),
                            SizedBox(height: 85,),
@@ -114,20 +113,19 @@ class _LoginViewState extends State<LoginView> {
                              mainAxisAlignment: MainAxisAlignment.center,
                              children: [
                                Text("Don’t have an account? ",
-                                 style: TextStyle(
-                                     fontSize: 18,
+                                 style:AppStyles.textStyle18.copyWith(
                                      fontWeight: FontWeight.w500
-                                 ),),
+                                 )
+                               ),
                                GestureDetector(
                                  onTap: (){
                                    GoRouter.of(context).push(PagesRoute.init);
                                  },
                                  child: Text("Sign up now",
-                                   style: TextStyle(
-                                       fontSize: 18,
+                                   style:AppStyles.textStyle18.copyWith(
                                        fontWeight: FontWeight.w500,
                                        color: AppColors.primaryColor
-                                   ),
+                                   )
                                  ),
                                )
                              ],

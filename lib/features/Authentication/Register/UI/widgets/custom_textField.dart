@@ -1,6 +1,8 @@
+import 'package:authentication/core/theme/appTheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/colors/AppColors.dart';
+import '../../../../../core/functions/regex.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({super.key, required this.label, this.prefixIcon, required this.hint, required this.warn, this.controller});
@@ -17,15 +19,26 @@ class CustomTextField extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child: Text(label,
-            style: TextStyle(
-                color: AppColors.primaryColor,
-                fontSize: 20,
+            style: AppStyles.textStyle20.copyWith(
+              color: AppColors.primaryColor,
                 fontWeight: FontWeight.w500
             ),
           ),
         ),
         SizedBox(height: 10),
         TextFormField(
+          validator: (value)
+          {
+            if(label == "Email" || label == "Email Address")
+              {
+                if (value == null || value.isEmpty) {
+                  return "Email is required";
+                } else if (!isValidEmail(value)) {
+                  return "Invalid email format";
+                }
+                return null; // valid
+              }
+          },
           controller: controller,
           decoration: InputDecoration(
             prefixIcon: prefixIcon,
@@ -38,16 +51,22 @@ class CustomTextField extends StatelessWidget {
                 width: 3.0,
               ),
             ),
-            focusedBorder: OutlineInputBorder(
+            errorBorder: UnderlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-              color: AppColors.primaryColor,
-              width: 3.0,
+                borderSide: BorderSide(color: Colors.red,width: 2),
+            ),
+            focusedErrorBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: Colors.red, width: 2),
+            ),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(
+                color: AppColors.primaryColor,
+                width: 3.0,
               )
             )
           ),
-          validator: (value) =>
-                value == null || value.isEmpty ? warn: null,
         ),
         SizedBox(height: 16,)
       ],

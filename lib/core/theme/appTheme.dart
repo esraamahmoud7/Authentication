@@ -1,8 +1,7 @@
-
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-abstract class Styles {
+abstract class AppStyles {
   static const textStyle18 = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w600,
@@ -11,8 +10,20 @@ abstract class Styles {
     fontSize: 24,
     fontWeight: FontWeight.bold,
   );
+  static const textStyle20 = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.normal,
+  );
+  static const textStyle22 = TextStyle(
+    fontSize: 22,
+    fontWeight: FontWeight.normal,
+  );
   static const textStyle28 = TextStyle(
     fontSize: 28,
+    fontWeight: FontWeight.w900,
+  );
+  static const textStyle26 = TextStyle(
+    fontSize: 26,
     fontWeight: FontWeight.w900,
   );
   static const textStyle14 = TextStyle(
